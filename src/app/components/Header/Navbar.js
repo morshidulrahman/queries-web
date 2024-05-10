@@ -1,13 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 function Navbar() {
   const [toggle, settoggle] = useState(false);
 
-  //   const [nextTheme, setTheme] = useTheme();
-  //   const { user, LogOut } = useContext(UserAuth);
-
-  const user = null;
+  const { user, Logout } = useAuth();
 
   const navitems = (
     <>
@@ -74,10 +73,10 @@ function Navbar() {
     </>
   );
 
-  //   const handleLogout = () => {
-  //     LogOut();
-  //     toast.success("Logged out successfully");
-  //   };
+  const handleLogout = () => {
+    Logout();
+    toast.success("Logged out successfully");
+  };
 
   return (
     <nav className="w-full border-b dark:bg-gray-900 dark:text-white bg-white dark:border-b-gray-800">
@@ -128,21 +127,15 @@ function Navbar() {
                 </div>
               ) : (
                 <div className="flex gap-4 items-center">
-                  <Tooltip
-                    className="z-50 dark:bg-white dark:text-gray-800"
-                    id="my-tooltip"
-                    place="top"
-                    content={user?.displayName}
-                  />
                   <img
-                    data-tooltip-id="my-tooltip"
+                    referrerPolicy="no-referrer"
                     src={user?.photoURL}
                     alt="me"
                     className="h-10 w-10 rounded-full p-1 bg-black"
                   />
 
                   <button
-                    onClick={"handleLogout"}
+                    onClick={handleLogout}
                     className="bg-[#017b6e] text-white px-4 py-2 rounded-md hover:bg-transparent hover:text-[#017b6e] duration-300 transition-all border border-[#017b6e] "
                   >
                     Logout

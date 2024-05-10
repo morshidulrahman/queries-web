@@ -1,20 +1,37 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
+  const { GoogleLogin, Signin } = useAuth();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const { email, password } = data;
-
-    console.log(data);
+    try {
+      await Signin(email, password);
+      toast.success("login successful");
+    } catch (e) {
+      toast.error(e.message);
+    }
   };
+
+  const handleGoogle = async () => {
+    try {
+      await GoogleLogin();
+      toast.success("google login successful");
+    } catch (e) {
+      toast.error(e.message);
+    }
+  };
+
   return (
     <div className="w-full max-w-sm md:max-w-md p-6 m-auto mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 my-10 border">
       <div className="flex justify-center mx-auto">
@@ -87,6 +104,7 @@ const Login = () => {
 
       <div className="flex items-center mt-6  mx-auto">
         <button
+          onClick={handleGoogle}
           type="button"
           className="mx-auto hover:scale-105 duration-300 transition-all"
         >
