@@ -1,0 +1,77 @@
+{
+    "recentPosts": [
+      {
+        "productImage": "https://i.ibb.co/xjycNFQ/androidphones-2048px-4861.jpg",
+        "queryTitle": "Which mobile phone has the best camera quality under $500?",
+        "productName": "Best Camera Phone Under $500",
+        "brandName": "TechMaster",
+        "alternationReason": "Looking for a budget-friendly phone with excellent camera performance.",
+        "datePosted": "2024-05-09",
+        "userInfo": {
+          "name": "TechEnthusiast123",
+          "thumbnailImage": "user_thumbnail_image_url_1"
+        }
+      },
+      {
+        "productImage": "https://i.ibb.co/JtQsdVx/pexels-craigmdennis-205421.jpg",
+        "queryTitle": "Need help choosing a laptop for graphic design work.",
+        "productName": "Laptop for Graphic Design",
+        "brandName": "DesignTech",
+        "alternationReason": "Looking for a powerful laptop with good display and graphics performance.",
+        "datePosted": "2024-05-09",
+        "userInfo": {
+          "name": "DesignGuru456",
+          "thumbnailImage": "user_thumbnail_image_url_2"
+        }
+      },
+      {
+        "productImage": "https://i.ibb.co/YXtkVDK/photo-1491472253230-a044054ca35f.jpg",
+        "queryTitle": "Recommendations for noise-canceling headphones for travel.",
+        "productName": "Noise-Canceling Headphones for Travel",
+        "brandName": "SoundExperts",
+        "alternationReason": "Need headphones with effective noise cancellation for long flights.",
+        "datePosted": "2024-05-08",
+        "userInfo": {
+          "name": "TravelerSound",
+          "thumbnailImage": "user_thumbnail_image_url_3"
+        }
+      },
+      {
+        "productImage": "https://i.ibb.co/YXtkVDK/photo-1491472253230-a044054ca35f.jpg",
+        "queryTitle": "Which DSLR camera is best for beginners?",
+        "productName": "Beginner DSLR Camera",
+        "brandName": "PhotoPro",
+        "alternationReason": "Searching for a user-friendly camera with good features for beginners.",
+        "datePosted": "2024-05-07",
+        "userInfo": {
+          "name": "PhotoEnthusiast",
+          "thumbnailImage": "user_thumbnail_image_url_4"
+        }
+      },
+      {
+        "productImage": "https://i.ibb.co/JtQsdVx/pexels-craigmdennis-205421.jpg",
+        "queryTitle": "Looking for a tablet for note-taking and productivity tasks.",
+        "productName": "Note-Taking Tablet",
+        "brandName": "NoteTech",
+        "alternationReason": "Need a tablet with stylus support and efficient note-taking apps.",
+        "datePosted": "2024-05-06",
+        "userInfo": {
+          "name": "NoteTaker",
+          "thumbnailImage": "user_thumbnail_image_url_5"
+        }
+      },
+      {
+        "productImage": "https://i.ibb.co/xjycNFQ/androidphones-2048px-4861.jpg",
+        "queryTitle": "Recommendations for a fitness-focused smartwatch under $200.",
+        "productName": "Fitness Smartwatch Under $200",
+        "brandName": "FitGear",
+        "alternationReason": "Searching for a smartwatch with fitness tracking features within budget.",
+        "datePosted": "2024-05-05",
+        "userInfo": {
+          "name": "FitEnthusiast",
+          "thumbnailImage": "user_thumbnail_image_url_6"
+        }
+      }
+    ]
+  }
+  
