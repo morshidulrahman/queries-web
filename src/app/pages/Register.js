@@ -16,9 +16,9 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 my-10 border">
+    <div className="w-full max-w-sm md:max-w-md p-6 m-auto mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 my-10 border">
       <div className="flex justify-center mx-auto">
-        <p className="text-center font-bold py-1 text-2xl">Login</p>
+        <p className="text-center font-bold py-1 text-2xl">Register</p>
       </div>
 
       <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
