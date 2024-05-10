@@ -84,7 +84,7 @@ function Navbar() {
         <div className="flex justify-between items-center py-5">
           <div className="flex space-x-2">
             <Link className="text-3xl font-bold font-heading" to="/">
-              Rebbit
+              <img src="./rebit.png" alt="rebyr" className="w-40" />
             </Link>
           </div>
           <div>
@@ -126,7 +126,10 @@ function Navbar() {
                   </Link>
                 </div>
               ) : (
-                <div className="flex gap-4 items-center">
+                <div
+                  className="flex gap-4 items-center"
+                  title={user?.displayName}
+                >
                   <img
                     referrerPolicy="no-referrer"
                     src={user?.photoURL}
