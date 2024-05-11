@@ -8,6 +8,7 @@ const QuriesCard = ({ quris }) => {
     datePosted,
     alternationReason,
     productImage,
+    userInfo,
   } = quris;
   return (
     <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -41,24 +42,26 @@ const QuriesCard = ({ quris }) => {
         </div>
         <div className="mt-4">
           <div className="flex items-center">
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
               <img
                 className="object-cover h-10 rounded-full"
-                src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60"
-                alt="Avatar"
+                src={userInfo.thumbnailImage}
+                alt={userInfo.name}
               />
-              <a
-                href="#"
-                className="mx-2 font-semibold text-gray-700 dark:text-gray-200"
-                tabIndex={0}
-                role="link"
-              >
-                Jone Doe
-              </a>
+              <div className="">
+                <a
+                  href="#"
+                  className=" font-semibold text-gray-700 dark:text-gray-200"
+                  tabIndex={0}
+                  role="link"
+                >
+                  Jone Doe
+                </a>
+                <span className="mx-1 text-xs text-gray-600 dark:text-gray-300 block">
+                  {datePosted}
+                </span>
+              </div>
             </div>
-            <span className="mx-1 text-xs text-gray-600 dark:text-gray-300">
-              {datePosted}
-            </span>
           </div>
         </div>
       </div>

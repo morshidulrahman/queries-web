@@ -37,7 +37,7 @@ const Register = () => {
           withCredentials: true,
         }
       );
-      console.log(data);
+
       toast.success("google login successful");
       navigate(from, { replace: true });
     } catch (e) {
@@ -60,7 +60,7 @@ const Register = () => {
           withCredentials: true,
         }
       );
-      console.log(data);
+
       toast.success("user created successfully");
       navigate(from, { replace: true });
     } catch (e) {
