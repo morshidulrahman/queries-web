@@ -8,6 +8,7 @@ const Quries = () => {
     fetch("./app.json")
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setdata(data.recentPosts);
       });
   }, []);
@@ -16,10 +17,9 @@ const Quries = () => {
     <div className="container mx-auto px-5 py-10">
       <h1 className="font-bold text-center py-5 text-4xl">Recent Quries</h1>
       <div className="mt-6 grid grid-cols-3 gap-6">
-        <QuriesCard />
-        <QuriesCard />
-        <QuriesCard />
-        <QuriesCard />
+        {data?.map((quris, ind) => (
+          <QuriesCard quris={quris} key={ind} />
+        ))}
       </div>
     </div>
   );

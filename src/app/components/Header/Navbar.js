@@ -34,7 +34,7 @@ function Navbar() {
         <>
           <li>
             <NavLink
-              to="/addtourist"
+              to="/recommendation"
               className={({ isActive }) =>
                 isActive
                   ? " text-lg font-[600]   py-3  text-[#017b6e]"
@@ -46,7 +46,7 @@ function Navbar() {
           </li>
           <li>
             <NavLink
-              to="/mylist"
+              to="/myqueries"
               className={({ isActive }) =>
                 isActive
                   ? " text-lg font-[600]   py-3  text-[#017b6e]"
@@ -58,7 +58,7 @@ function Navbar() {
           </li>
           <li>
             <NavLink
-              to="/mylist"
+              to="/myrecommendations"
               className={({ isActive }) =>
                 isActive
                   ? " text-lg font-[600]   py-3  text-[#017b6e]"

@@ -1,17 +1,25 @@
 import React from "react";
 
-const QuriesCard = () => {
+const QuriesCard = ({ quris }) => {
+  const {
+    brandName,
+    productName,
+    queryTitle,
+    datePosted,
+    alternationReason,
+    productImage,
+  } = quris;
   return (
     <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
       <img
         className="object-cover w-full h-64"
-        src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-        alt="Article"
+        src={productImage}
+        alt={queryTitle}
       />
       <div className="p-6">
         <div>
           <span className="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">
-            Product
+            {brandName}
           </span>
           <a
             href="#"
@@ -19,13 +27,16 @@ const QuriesCard = () => {
             tabIndex={0}
             role="link"
           >
-            I Built A Successful Blog In One Year
+            {productName}
           </a>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie
-            parturient et sem ipsum volutpat vel. Natoque sem et aliquam mauris
-            egestas quam volutpat viverra. In pretium nec senectus erat. Et
-            malesuada lobortis.
+            {queryTitle}
+          </p>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            <span className="text-black font-semibold capitalize">
+              reason :{" "}
+            </span>{" "}
+            {alternationReason}
           </p>
         </div>
         <div className="mt-4">
@@ -46,7 +57,7 @@ const QuriesCard = () => {
               </a>
             </div>
             <span className="mx-1 text-xs text-gray-600 dark:text-gray-300">
-              21 SEP 2015
+              {datePosted}
             </span>
           </div>
         </div>
