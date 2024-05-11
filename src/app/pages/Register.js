@@ -1,11 +1,24 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Register = () => {
-  const { GoogleLogin, user, setUser, CreateUser, Updateuser } = useAuth();
+  const { GoogleLogin, user, setUser, CreateUser, Updateuser, loading } =
+    useAuth();
+  const location = useLocation();
+  const from = location.state || "/";
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
+
   const {
     register,
     handleSubmit,
@@ -14,8 +27,19 @@ const Register = () => {
 
   const handleGoogle = async () => {
     try {
-      await GoogleLogin();
+      const result = await GoogleLogin();
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(data);
       toast.success("google login successful");
+      navigate(from, { replace: true });
     } catch (e) {
       toast.error(e.message);
     }
@@ -26,12 +50,25 @@ const Register = () => {
     try {
       const result = await CreateUser(email, password);
       await Updateuser(name, photourl);
-      setUser({ ...user, photoURL: photourl, displayName: name });
+      setUser({ ...result?.user, photoURL: photourl, displayName: name });
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(data);
       toast.success("user created successfully");
+      navigate(from, { replace: true });
     } catch (e) {
       toast.error(e.message);
     }
   };
+
+  if (user || loading) return;
 
   return (
     <div className="w-full max-w-sm md:max-w-md p-6 m-auto mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 my-10 border">

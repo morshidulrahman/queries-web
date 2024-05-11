@@ -1,11 +1,22 @@
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Login = () => {
-  const { GoogleLogin, Signin } = useAuth();
+  const { GoogleLogin, Signin, user, loading } = useAuth();
+  const location = useLocation();
+  const from = location.state || "/";
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   const {
     register,
@@ -16,8 +27,19 @@ const Login = () => {
   const onSubmit = async (data) => {
     const { email, password } = data;
     try {
-      await Signin(email, password);
+      const result = await Signin(email, password);
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(data);
       toast.success("login successful");
+      navigate(from, { replace: true });
     } catch (e) {
       toast.error(e.message);
     }
@@ -25,13 +47,24 @@ const Login = () => {
 
   const handleGoogle = async () => {
     try {
-      await GoogleLogin();
+      const result = await GoogleLogin();
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(data);
       toast.success("google login successful");
+      navigate(from, { replace: true });
     } catch (e) {
       toast.error(e.message);
     }
   };
-
+  if (user || loading) return;
   return (
     <div className="w-full max-w-sm md:max-w-md p-6 m-auto mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 my-10 border">
       <div className="flex justify-center mx-auto">

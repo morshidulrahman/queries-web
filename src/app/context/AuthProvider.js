@@ -9,10 +9,11 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import auth from "../firebase/firebase";
+import axios from "axios";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(true);
   const [user, setUser] = useState(null);
   const provider = new GoogleAuthProvider();
 
@@ -38,8 +39,13 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const Logout = () => {
-    signOut(auth);
+  const Logout = async () => {
+    setloading(true);
+    const { data } = await axios(`${import.meta.env.VITE_API_URL}/logout`, {
+      withCredentials: true,
+    });
+    console.log(data);
+    return signOut(auth);
   };
 
   useEffect(() => {

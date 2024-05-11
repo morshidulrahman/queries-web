@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import QuriesCard from "./QuriesCard";
-
+import axios from "axios";
 const Quries = () => {
   const [data, setdata] = useState();
 
   useEffect(() => {
-    fetch("./app.json")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setdata(data.recentPosts);
-      });
+    const getData = async () => {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/queries`);
+      setdata(res.data);
+    };
+    getData();
   }, []);
 
   return (
