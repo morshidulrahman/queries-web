@@ -71,11 +71,13 @@ const QuriesCard = ({ quris, reccombtn }) => {
                 </span>
               </div>
             </div>
-            <Link to={`/queiresdetails/${_id}`}>
-              <button className="bg-[#017b6e] text-white rounded-md px-3 py-2">
-                recommend
-              </button>
-            </Link>
+            {reccombtn && (
+              <Link to={`/queiresdetails/${_id}`}>
+                <button className="bg-[#017b6e] text-white rounded-md px-3 py-2">
+                  recommend
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
