@@ -2,11 +2,26 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const QueryDetails = () => {
   const { id } = useParams();
   const [data, setdata] = useState([]);
+  const [recommend, setrecommend] = useState([]);
   const [loading, setloading] = useState(false);
+  const { user } = useAuth();
+
+  const getComment = async () => {
+    try {
+      const { data } = await axios(
+        `${import.meta.env.VITE_API_URL}/recommendations/${id}`
+      );
+      setrecommend(data);
+      console.log("recomenddata", data);
+    } catch (e) {
+      toast.error(e.message);
+    }
+  };
 
   useEffect(() => {
     setloading(true);
@@ -22,10 +37,12 @@ const QueryDetails = () => {
       }
     };
     getData();
+    getComment();
   }, []);
 
   const {
     productName,
+    _id,
     brandName,
     productImage,
     queryTitle,
@@ -33,11 +50,51 @@ const QueryDetails = () => {
     userInfo,
   } = data || {};
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+
+    const from = e.target;
+    const recommendation_name = from.Product_name.value;
+    const recommendation_title = from.Product_title.value;
+    const recommendation_reasone = from.recommend_reason.value;
+    const recommendation_Image = from.imageUrl.value;
+
+    const recommend_info = {
+      recommendation_name,
+      recommendation_title,
+      recommendation_reasone,
+      recommendation_Image,
+      queryId: _id,
+      recommenderEmail: user?.email,
+      recommenderName: user?.displayName,
+      currentDate: formattedDate,
+      UserName: userInfo?.name,
+      UserEmail: userInfo?.email,
+    };
+
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/recommendations`,
+        recommend_info
+      );
+      toast.success("comment successfully");
+      console.log(data);
+      getComment();
+    } catch (e) {
+      toast.error(e.message);
+    }
+  };
+
   if (loading) {
     return <h1>loading.........</h1>;
   }
 
-  console.log(productName);
   return (
     <div className="container mx-auto px-5 ">
       <h1 className="py-10 font-bold text-center text-2xl">Queries Details</h1>
@@ -101,14 +158,45 @@ const QueryDetails = () => {
                 </div>
               </div>
             </div>
+            <div className="mt-12">
+              <h2 className="font-semibold pb-4 text-lg">
+                All Recommendations
+              </h2>
+              <div className=" flex flex-col gap-4">
+                {recommend?.map((a, i) => (
+                  <div
+                    key={i}
+                    className="flex gap-5 bg-gray-100 px-4 py-3 rounded-lg items-center border border-gray-300"
+                  >
+                    <div
+                      alt="laptop"
+                      className={`w-64 md:w-32 h-24 rounded-md bg-cover`}
+                      style={{
+                        backgroundImage: `url(${a.recommendation_Image})`,
+                      }}
+                    />
+                    <div>
+                      <h1 className="font-semibold">
+                        {a.recommendation_title}
+                      </h1>
+                      <p className="py-1">
+                        Looking for a budget-friendly phone with excellent
+                        camera performance
+                      </p>
+                      <p className="text-sm text-gray-600">2024-05-05</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-        <div className="bg-white border rounded-lg p-5 ">
+        <div className="bg-white border rounded-lg p-5 lg:w-1/2 max-w-2xl">
           <h2 className="py-3 font-semibold text-center">
             Add a Recommendations
           </h2>
-          <form onSubmit={""}>
-            <div className="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2">
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 gap-6 mt-6">
               <div>
                 <label
                   className="text-gray-700 dark:text-gray-200"
@@ -125,11 +213,11 @@ const QueryDetails = () => {
               </div>
               <div>
                 <label className="text-gray-700 dark:text-gray-200">
-                  Product Brand
+                  Product Title
                 </label>
                 <input
                   type="text"
-                  name="Product_brand"
+                  name="Product_title"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                   required
                 />
@@ -147,26 +235,17 @@ const QueryDetails = () => {
               </div>
               <div>
                 <label className="text-gray-700 dark:text-gray-200">
-                  Query Title
+                  Recommendation Reason
                 </label>
                 <input
                   type="text"
-                  name="query_title"
+                  name="recommend_reason"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
             </div>
-            <div className="mt-4">
-              <label className="text-gray-700 dark:text-gray-200">
-                Boycotting Reasone
-              </label>
-              <input
-                type="text"
-                name="boycoting_reason"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
-            <div className="flex  mt-6">
+
+            <div className="flex  mt-8">
               <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-[#017b6e] rounded-md hover:bg-[#017b6fe7] focus:outline-none w-full">
                 Recommendation
               </button>
