@@ -9,20 +9,19 @@ const MyQueries = () => {
   const [Queries, setQueries] = useState([]);
   const { user } = useAuth();
 
+  const getData = async () => {
+    const res = await axios.get(
+      `${import.meta.env.VITE_API_URL}/myqueries/${user?.email}`
+    );
+
+    const sortedData = res.data.sort((a, b) => {
+      return new Date(b.userInfo.datePosted) - new Date(a.userInfo.datePosted);
+    });
+
+    setQueries(sortedData);
+  };
+
   useEffect(() => {
-    const getData = async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/myqueries/${user?.email}`
-      );
-
-      const sortedData = res.data.sort((a, b) => {
-        return (
-          new Date(b.userInfo.datePosted) - new Date(a.userInfo.datePosted)
-        );
-      });
-
-      setQueries(sortedData);
-    };
     getData();
   }, []);
 
@@ -57,7 +56,11 @@ const MyQueries = () => {
       ) : (
         <div className="py-10 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2  gap-5 container mx-auto px-5">
           {Queries?.map((queries) => (
-            <MyQuariesCard key={queries._id} queries={queries} />
+            <MyQuariesCard
+              key={queries._id}
+              queries={queries}
+              getData={getData}
+            />
           ))}
         </div>
       )}

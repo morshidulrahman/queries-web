@@ -84,7 +84,11 @@ function Navbar() {
         <div className="flex justify-between items-center py-5">
           <div className="flex space-x-2">
             <Link className="text-3xl font-bold font-heading" to="/">
-              <img src="./rebit.png" alt="rebyr" className="w-40" />
+              <img
+                src="https://i.ibb.co/8gWMykG/rebit.png"
+                alt="rebyr"
+                className="w-40"
+              />
             </Link>
           </div>
           <div>

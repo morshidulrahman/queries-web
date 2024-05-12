@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateQueries = () => {
   const { id } = useParams();
   const [data, setdata] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
@@ -52,7 +53,10 @@ const UpdateQueries = () => {
         `${import.meta.env.VITE_API_URL}/queries/${id}`,
         productInfo
       );
-      console.log(data);
+      if (data.modifiedCount > 0) {
+        toast.success("Queries updated successfully");
+        navigate("/myqueries");
+      }
     } catch (e) {
       toast.error(e.message);
     }
