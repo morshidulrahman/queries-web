@@ -5,7 +5,7 @@ const QuriesCard = ({ quris }) => {
     brandName,
     productName,
     queryTitle,
-    datePosted,
+
     alternationReason,
     productImage,
     userInfo,
@@ -55,10 +55,10 @@ const QuriesCard = ({ quris }) => {
                   tabIndex={0}
                   role="link"
                 >
-                  Jone Doe
+                  {userInfo.name}
                 </a>
                 <span className="mx-1 text-xs text-gray-600 dark:text-gray-300 block">
-                  {datePosted}
+                  {userInfo.datePosted}
                 </span>
               </div>
             </div>

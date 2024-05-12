@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 
 import MyQuariesCard from "../components/myQuries/MyQuariesCard";
+import { Link } from "react-router-dom";
 
 const MyQueries = () => {
   const [Queries, setQueries] = useState([]);
@@ -15,7 +16,9 @@ const MyQueries = () => {
       );
 
       const sortedData = res.data.sort((a, b) => {
-        return new Date(b.datePosted) - new Date(a.datePosted);
+        return (
+          new Date(b.userInfo.datePosted) - new Date(a.userInfo.datePosted)
+        );
       });
 
       setQueries(sortedData);
@@ -30,9 +33,11 @@ const MyQueries = () => {
           <h1 className="text-3xl font-semibold">
             Explore and Manage Your Customer Inquiries
           </h1>
-          <button className="bg-black hover:bg-[#000000f2] text-white font-semibold py-2 px-6 mt-5 rounded ">
-            Add Queries
-          </button>
+          <Link to="/addqueries">
+            <button className="bg-black hover:bg-[#000000f2] text-white font-semibold py-2 px-6 mt-5 rounded ">
+              Add Queries
+            </button>
+          </Link>
         </div>
       </div>
 

@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MyQuariesCard = ({ queries }) => {
   const {
-    brandName,
+    _id,
     productName,
     queryTitle,
     datePosted,
-    alternationReason,
+
     productImage,
   } = queries;
 
@@ -34,7 +35,21 @@ const MyQuariesCard = ({ queries }) => {
           </p>
         </div>
         <div className="mt-4">
-          <div className="flex items-center"></div>
+          <div className="flex items-center gap-4">
+            <Link to={`/queiresdetails/${_id}`}>
+              <button className="bg-green-600 text-white  px-4 py-2 rounded-md hover:bg-green-500 duration-300 transition-all">
+                view
+              </button>
+            </Link>
+            <Link to={`/editqueries/${_id}`}>
+              <button className="bg-orange-600 text-white hover:bg-orange-500  px-3 py-2 rounded-md duration-300 transition-all">
+                Update
+              </button>
+            </Link>
+            <button className="bg-red-600 text-white hover:bg-red-500   px-3 py-2 rounded-md duration-300 transition-all">
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>
