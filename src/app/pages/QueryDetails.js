@@ -23,19 +23,21 @@ const QueryDetails = () => {
     }
   };
 
+  const getData = async () => {
+    try {
+      const { data } = await axios(
+        `${import.meta.env.VITE_API_URL}/queries/${id}`
+      );
+      setdata(data);
+      setloading(false);
+    } catch (e) {
+      toast.error(e.message);
+    }
+  };
+
   useEffect(() => {
     setloading(true);
-    const getData = async () => {
-      try {
-        const { data } = await axios(
-          `${import.meta.env.VITE_API_URL}/queries/${id}`
-        );
-        setdata(data);
-        setloading(false);
-      } catch (e) {
-        toast.error(e.message);
-      }
-    };
+
     getData();
     getComment();
   }, []);
@@ -84,8 +86,16 @@ const QueryDetails = () => {
         recommend_info
       );
       toast.success("comment successfully");
-      console.log(data);
       getComment();
+      try {
+        const res = await axios.patch(
+          `${import.meta.env.VITE_API_URL}/myrecqueries/${_id}`
+        );
+        getData();
+        console.log("resdata", res.data);
+      } catch (e) {
+        toast.error(e.message);
+      }
     } catch (e) {
       toast.error(e.message);
     }
