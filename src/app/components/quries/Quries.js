@@ -16,7 +16,7 @@ const Quries = () => {
     <div className="container mx-auto px-5 py-10">
       <h1 className="font-bold text-center py-5 text-4xl">Recent Quries</h1>
       <div className="mt-6 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
-        {data?.map((quris, ind) => (
+        {data?.slice(0, 6).map((quris, ind) => (
           <QuriesCard quris={quris} key={ind} />
         ))}
       </div>

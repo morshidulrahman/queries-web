@@ -40,12 +40,27 @@ const MyQueries = () => {
           </Link>
         </div>
       </div>
-
-      <div className="py-10 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2  gap-5 container mx-auto px-5">
-        {Queries?.map((queries) => (
-          <MyQuariesCard key={queries._id} queries={queries} />
-        ))}
-      </div>
+      {Queries.length == 0 ? (
+        <div className="py-20 flex items-center justify-center flex-col gap-5">
+          <img
+            src="https://i.ibb.co/F7SsVnK/empty-cart.gif"
+            alt="emptycart"
+            className=""
+          />
+          <p className="font-bold py-2 text-lg">Your Quries is Empty</p>
+          <Link to="/addqueries">
+            <button className="bg-black hover:bg-[#000000f2] text-white font-semibold py-2 px-6 mt-5 rounded ">
+              Add Queries
+            </button>
+          </Link>
+        </div>
+      ) : (
+        <div className="py-10 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2  gap-5 container mx-auto px-5">
+          {Queries?.map((queries) => (
+            <MyQuariesCard key={queries._id} queries={queries} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
