@@ -57,8 +57,8 @@ const RecommendTable = ({ getData, recom }) => {
             className="size-16 rounded-lg bg-gray-600"
           />
         </td>
-        <td className="px-6 py-4">{recommendation_name}</td>
-        <td className="px-6 py-4">{recommendation_title}</td>
+        <td className="px-6 py-4 w-1/4">{recommendation_name}</td>
+        <td className="px-6 py-4 w-1/4">{recommendation_title}</td>
 
         <td className="px-6 py-4">
           <button

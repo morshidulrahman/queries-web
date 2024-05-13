@@ -91,7 +91,7 @@ const QueryDetails = () => {
         `${import.meta.env.VITE_API_URL}/myrecqueries/${_id}`
       );
       getData();
-      console.log("resdata", res.data);
+
       from.reset();
     } catch (e) {
       toast.error(e.message);

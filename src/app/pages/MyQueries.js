@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 const MyQueries = () => {
   const [Queries, setQueries] = useState([]);
   const { user } = useAuth();
+  const [loading, setloading] = useState(true);
 
   const getData = async () => {
     const res = await axios.get(
@@ -23,7 +24,10 @@ const MyQueries = () => {
 
   useEffect(() => {
     getData();
+    setloading(false);
   }, []);
+
+  if (loading) return <h1>loading.........</h1>;
 
   return (
     <div>
