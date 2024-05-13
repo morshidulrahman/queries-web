@@ -87,15 +87,12 @@ const QueryDetails = () => {
       );
       toast.success("comment successfully");
       getComment();
-      try {
-        const res = await axios.patch(
-          `${import.meta.env.VITE_API_URL}/myrecqueries/${_id}`
-        );
-        getData();
-        console.log("resdata", res.data);
-      } catch (e) {
-        toast.error(e.message);
-      }
+      const res = await axios.patch(
+        `${import.meta.env.VITE_API_URL}/myrecqueries/${_id}`
+      );
+      getData();
+      console.log("resdata", res.data);
+      from.reset();
     } catch (e) {
       toast.error(e.message);
     }
@@ -118,11 +115,11 @@ const QueryDetails = () => {
           <div className="p-6">
             <div className="">
               <div className="flex justify-between py-1">
-                <span className="text-xs font-medium text-blue-600 uppercase dark:text-blue-400 block">
+                <span className="text font-medium text-blue-600 uppercase dark:text-blue-400 block">
                   {brandName}
                 </span>
 
-                <span className="text-xs font-medium text-blue-600 uppercase dark:text-blue-400 block pr-6">
+                <span className="text font-medium text-blue-600 uppercase dark:text-blue-400 block pr-6">
                   recommendationCount : {userInfo?.recommendationCount}
                 </span>
               </div>
