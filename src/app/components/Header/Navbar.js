@@ -2,10 +2,15 @@ import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { GrFormClose } from "react-icons/gr";
+import { AiOutlineMenu } from "react-icons/ai";
+import useTheme from "../../hooks/useTheme";
+import { BsMoonStarsFill } from "react-icons/bs";
+import { BiSun } from "react-icons/bi";
 
 function Navbar() {
   const [toggle, settoggle] = useState(false);
-
+  const [nextTheme, setTheme] = useTheme();
   const { user, Logout } = useAuth();
 
   const navitems = (
@@ -95,8 +100,8 @@ function Navbar() {
             <ul
               className={` ${
                 toggle
-                  ? "flex  fixed top-0 right-0 w-48 bg-slate-100 dark:bg-gray-800 h-full flex-col justify-center items-center z-50 gap-2"
-                  : "lg:flex items-center hidden md:space-x-4 lg:space-x-7"
+                  ? "flex  fixed top-0 right-0 w-48 bg-slate-100 dark:bg-gray-800 h-full flex-col justify-center items-center z-50 gap-2 text-center lg:hidden"
+                  : "lg:flex items-center hidden md:space-x-4 lg:space-x-5"
               }`}
             >
               {navitems}
@@ -104,22 +109,21 @@ function Navbar() {
                 className="lg:hidden absolute top-3 right-[155px] dark:text-white"
                 onClick={() => settoggle(false)}
               >
-                {/* <GrFormClose
+                <GrFormClose
                   size={23}
                   className="dark:bg-white rounded-full text-gray-800"
-                /> */}
-                close
+                />
               </span>
             </ul>
           </div>
           <div className="flex items-center md:space-x-4 space-x-2">
-            {/* <div className="" onClick={() => setTheme(nextTheme)}>
+            <div className="" onClick={() => setTheme(nextTheme)}>
               {nextTheme === "dark" ? (
                 <BsMoonStarsFill size={23} />
               ) : (
                 <BiSun size={23} />
               )}
-            </div> */}
+            </div>
             <div className="relative">
               {!user ? (
                 <div className="flex md:gap-4 gap-2">
@@ -155,7 +159,7 @@ function Navbar() {
               className="lg:hidden block dark:text-white"
               onClick={() => settoggle(true)}
             >
-              {/* <AiOutlineMenu size={28} /> */}
+              <AiOutlineMenu size={28} />
             </span>
           </div>
         </div>

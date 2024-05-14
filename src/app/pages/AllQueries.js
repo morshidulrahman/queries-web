@@ -37,7 +37,9 @@ const AllQueries = () => {
 
   return (
     <div className="container mx-auto px-5 py-10">
-      <h1 className="font-bold text-center py-5 text-4xl">All Queries</h1>
+      <h1 className="font-bold text-center py-5 text-4xl dark:text-white">
+        All Queries
+      </h1>
       <div className="flex gap-5 justify-between items-center py-5">
         <div className=" w-1/2">
           <input

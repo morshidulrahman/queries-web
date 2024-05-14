@@ -20,7 +20,7 @@ const Recommendation = () => {
       const filerdata = data.filter((e) => e.recommenderEmail !== user?.email);
       setrecommendation(filerdata);
     } catch (e) {
-      toast.error(e.message);
+      console.log(e.message);
     }
   };
 
@@ -33,10 +33,10 @@ const Recommendation = () => {
 
   return (
     <div className="container mx-auto px-5">
-      <h1 className="text-center py-10 text-2xl font-bold">
+      <h1 className="text-center py-10 text-2xl font-bold dark:text-white">
         Recommendation For Me
       </h1>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg py-10">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>

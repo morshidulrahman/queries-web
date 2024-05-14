@@ -13,7 +13,7 @@ const QuriesCard = ({ quris, reccombtn }) => {
   } = quris;
 
   return (
-    <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+    <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 ">
       <img
         className="object-cover w-full h-64"
         src={productImage}
@@ -37,11 +37,11 @@ const QuriesCard = ({ quris, reccombtn }) => {
           >
             {productName}
           </a>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-2 text-sm text-gray-600 dark:text-white">
             {queryTitle}
           </p>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            <span className="text-black font-semibold capitalize">
+          <p className="mt-2 text-sm text-gray-600 dark:text-white">
+            <span className="text-black font-semibold capitalize dark:text-white">
               reason :{" "}
             </span>{" "}
             {alternationReason}

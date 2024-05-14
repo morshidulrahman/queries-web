@@ -7,8 +7,10 @@ const Layout = () => {
   return (
     <div>
       <Navbar />
-      <Outlet />
-      <Footer />
+      <div className="dark:bg-gray-900">
+        <Outlet />
+        <Footer />
+      </div>
     </div>
   );
 };
