@@ -32,10 +32,8 @@ const QuriesCard = ({ quris, reccombtn }) => {
             )}
           </div>
           <a
-            href="#"
             className="block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline"
             tabIndex={0}
-            role="link"
           >
             {productName}
           </a>
@@ -59,10 +57,8 @@ const QuriesCard = ({ quris, reccombtn }) => {
               />
               <div className="">
                 <a
-                  href="#"
                   className=" font-semibold text-gray-700 dark:text-gray-200"
                   tabIndex={0}
-                  role="link"
                 >
                   {userInfo.name}
                 </a>

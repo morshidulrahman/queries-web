@@ -13,8 +13,13 @@ const AllQueries = () => {
   useEffect(() => {
     const getData = async () => {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/queries`);
-      setData(res.data);
+
+      const sortedData = res.data.sort((a, b) => {
+        return parseInt(b._id) - parseInt(a._id);
+      });
+      setData(sortedData);
     };
+
     getData();
     setloading(false);
   }, []);
@@ -60,10 +65,10 @@ const AllQueries = () => {
         </div>
       </div>
       <div
-        className={`${layout == "one" ? "md:grid-cols-1" : ""}${
-          layout == "two" ? "md:grid-cols-2" : ""
+        className={`${layout === "one" ? "lg:grid-cols-1  " : ""}${
+          layout === "two" ? "lg:grid-cols-2 " : ""
         }
-        grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6`}
+      grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6`}
       >
         {SearchFilter?.map((query) => (
           <QuriesCard quris={query} key={query._id} reccombtn="recom" />

@@ -10,7 +10,8 @@ const Myrecommendation = () => {
 
   const getData = async () => {
     const res = await axios.get(
-      `${import.meta.env.VITE_API_URL}/myrecommendations/${user?.email}`
+      `${import.meta.env.VITE_API_URL}/myrecommendations/${user?.email}`,
+      { withCredentials: true }
     );
     setrecommendation(res.data);
   };

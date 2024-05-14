@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -28,9 +29,11 @@ const Hero = () => {
                 Satiate your curiosity and delve into a world of knowledge.
               </p>
 
-              <button className="bg-black text-white px-5 py-3 rounded-lg hover:bg-[#000000dd] hover:text-white duration-300 transition-all border border-black tracking-wider">
-                Explore
-              </button>
+              <Link to="/queries">
+                <button className="bg-black text-white px-5 py-3 rounded-lg hover:bg-[#000000dd] hover:text-white duration-300 transition-all border border-black tracking-wider">
+                  Queries
+                </button>
+              </Link>
             </div>
             <div className="lg:flex hidden w-[60%] p-24">
               <img
@@ -54,9 +57,11 @@ const Hero = () => {
                 Satiate your curiosity and delve into a world of knowledge.
               </p>
 
-              <button className="bg-black text-white px-5 py-3 rounded-lg hover:bg-[#000000dd] hover:text-white duration-300 transition-all border border-black tracking-wider">
-                Explore
-              </button>
+              <Link to="/queries">
+                <button className="bg-black text-white px-5 py-3 rounded-lg hover:bg-[#000000dd] hover:text-white duration-300 transition-all border border-black tracking-wider">
+                  Queries
+                </button>
+              </Link>
             </div>
             <div className="lg:flex hidden w-[60%] p-24">
               <img
@@ -80,9 +85,11 @@ const Hero = () => {
                 Satiate your curiosity and delve into a world of knowledge.
               </p>
 
-              <button className="bg-black text-white px-5 py-3 rounded-lg hover:bg-[#000000dd] hover:text-white duration-300 transition-all border border-black tracking-wider">
-                Explore
-              </button>
+              <Link to="/queries">
+                <button className="bg-black text-white px-5 py-3 rounded-lg hover:bg-[#000000dd] hover:text-white duration-300 transition-all border border-black tracking-wider">
+                  Queries
+                </button>
+              </Link>
             </div>
             <div className="lg:flex hidden w-[60%] p-24">
               <img

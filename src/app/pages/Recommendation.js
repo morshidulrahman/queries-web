@@ -12,7 +12,10 @@ const Recommendation = () => {
     try {
       setloading(true);
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/recommendationme/${user?.email}`
+        `${import.meta.env.VITE_API_URL}/recommendationme/${user?.email}`,
+        {
+          withCredentials: true,
+        }
       );
       const filerdata = data.filter((e) => e.recommenderEmail !== user?.email);
       setrecommendation(filerdata);

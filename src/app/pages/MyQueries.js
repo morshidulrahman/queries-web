@@ -12,7 +12,10 @@ const MyQueries = () => {
 
   const getData = async () => {
     const res = await axios.get(
-      `${import.meta.env.VITE_API_URL}/myqueries/${user?.email}`
+      `${import.meta.env.VITE_API_URL}/myqueries/${user?.email}`,
+      {
+        withCredentials: true,
+      }
     );
 
     const sortedData = res.data.sort((a, b) => {
