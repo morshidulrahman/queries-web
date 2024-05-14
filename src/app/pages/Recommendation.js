@@ -2,21 +2,22 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Loader from "../utils/Loader";
 
 const Recommendation = () => {
   const { user } = useAuth();
   const [recomendation, setrecommendation] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(true);
   const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
     try {
-      setloading(true);
       const { data } = await axiosSecure.get(
         `/recommendationme/${user?.email}`
       );
       const filerdata = data.filter((e) => e.recommenderEmail !== user?.email);
       setrecommendation(filerdata);
+      setloading(false);
     } catch (e) {
       console.log(e.message);
     }
@@ -24,10 +25,9 @@ const Recommendation = () => {
 
   useEffect(() => {
     getData();
-    setloading(false);
   }, [user]);
 
-  if (loading || recomendation.length == 0) return <h1>loading.........</h1>;
+  if (loading || recomendation.length == 0) return <Loader />;
 
   return (
     <div className="container mx-auto px-5">

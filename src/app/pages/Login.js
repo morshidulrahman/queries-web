@@ -29,9 +29,15 @@ const Login = () => {
     const { email, password } = data;
     try {
       const result = await Signin(email, password);
-      const { data } = await axiosSecure.post(` /jwt`, {
-        email: result?.user?.email,
-      });
+      const { data } = await axiosSecure.post(
+        `/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
       toast.success("login successful");
       navigate(from, { replace: true });
@@ -43,9 +49,15 @@ const Login = () => {
   const handleGoogle = async () => {
     try {
       const result = await GoogleLogin();
-      const { data } = await axiosSecure.post(` /jwt`, {
-        email: result?.user?.email,
-      });
+      const { data } = await axiosSecure.post(
+        `/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
       toast.success("google login successful");
       navigate(from, { replace: true });

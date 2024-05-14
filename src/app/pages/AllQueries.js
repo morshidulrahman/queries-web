@@ -4,6 +4,7 @@ import axios from "axios";
 import QuriesCard from "../components/quries/QuriesCard";
 import { CiGrid2H, CiGrid41 } from "react-icons/ci";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Loader from "../utils/Loader";
 
 const AllQueries = () => {
   const [data, setData] = useState([]);
@@ -35,7 +36,7 @@ const AllQueries = () => {
     e.productName.toLowerCase().includes(search.toLowerCase())
   );
 
-  if (loading || data.length == 0) return <h1>loading.........</h1>;
+  if (loading || data.length == 0) return <Loader />;
 
   return (
     <div className="container mx-auto px-5 py-10">

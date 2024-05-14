@@ -5,6 +5,7 @@ import useAuth from "../hooks/useAuth";
 import MyQuariesCard from "../components/myQuries/MyQuariesCard";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Loader from "../utils/Loader";
 
 const MyQueries = () => {
   const [Queries, setQueries] = useState([]);
@@ -21,14 +22,14 @@ const MyQueries = () => {
     });
 
     setQueries(sortedData);
+    setloading(false);
   };
 
   useEffect(() => {
     getData();
-    setloading(false);
   }, []);
 
-  if (loading) return <h1>loading.........</h1>;
+  if (loading) return <Loader />;
 
   return (
     <div>

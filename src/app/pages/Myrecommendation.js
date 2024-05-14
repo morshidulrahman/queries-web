@@ -3,21 +3,25 @@ import useAuth from "../hooks/useAuth";
 
 import RecommendTable from "../components/Recommen/RecommendTable";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Loader from "../utils/Loader";
 
 const Myrecommendation = () => {
   const { user } = useAuth();
   const [recomendation, setrecommendation] = useState();
+  const [loading, setloading] = useState(true);
   const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
     const res = await axiosSecure.get(`/myrecommendations/${user?.email}`);
     setrecommendation(res.data);
+    setloading(false);
   };
 
   useEffect(() => {
     getData();
   }, []);
 
+  if (loading) return <Loader />;
   return (
     <div className="container mx-auto px-5 py-10">
       <h1

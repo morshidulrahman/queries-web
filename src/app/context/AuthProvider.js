@@ -18,17 +18,14 @@ const AuthProvider = ({ children }) => {
   const provider = new GoogleAuthProvider();
 
   const CreateUser = (email, password) => {
-    setloading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const Signin = (email, password) => {
-    setloading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const GoogleLogin = () => {
-    setloading(true);
     return signInWithPopup(auth, provider);
   };
 
@@ -40,7 +37,6 @@ const AuthProvider = ({ children }) => {
   };
 
   const Logout = async () => {
-    setloading(true);
     const { data } = await axios(`${import.meta.env.VITE_API_URL}/logout`, {
       withCredentials: true,
     });
