@@ -1,21 +1,19 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
-import toast from "react-hot-toast";
+
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Recommendation = () => {
   const { user } = useAuth();
   const [recomendation, setrecommendation] = useState([]);
   const [loading, setloading] = useState(false);
+  const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
     try {
       setloading(true);
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/recommendationme/${user?.email}`,
-        {
-          withCredentials: true,
-        }
+      const { data } = await axiosSecure.get(
+        `/recommendationme/${user?.email}`
       );
       const filerdata = data.filter((e) => e.recommenderEmail !== user?.email);
       setrecommendation(filerdata);

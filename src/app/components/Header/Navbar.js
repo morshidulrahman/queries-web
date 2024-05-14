@@ -100,7 +100,7 @@ function Navbar() {
             <ul
               className={` ${
                 toggle
-                  ? "flex  fixed top-0 right-0 w-48 bg-slate-100 dark:bg-gray-800 h-full flex-col justify-center items-center z-50 gap-2 text-center lg:hidden"
+                  ? "flex  fixed top-0 right-0 w-48 bg-slate-100 dark:bg-gray-800 h-full flex-col justify-center items-center z-50 gap-4 text-center lg:hidden"
                   : "lg:flex items-center hidden md:space-x-4 lg:space-x-5"
               }`}
             >

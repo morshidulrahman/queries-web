@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import QuriesCard from "./QuriesCard";
-import axios from "axios";
+
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const Quries = () => {
   const [data, setdata] = useState();
-
+  const axiosSecure = useAxiosSecure();
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/queries`);
+      const res = await axiosSecure.get(`/queries`);
       setdata(res.data);
     };
     getData();

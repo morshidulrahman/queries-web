@@ -2,11 +2,11 @@ import React from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast";
-import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddQueries = () => {
   const { user } = useAuth();
-
+  const axiosSecure = useAxiosSecure();
   const handleSubmit = async (e) => {
     e.preventDefault();
     // to change the date format
@@ -41,10 +41,7 @@ const AddQueries = () => {
     };
 
     try {
-      const { data } = await axios.post(
-        ` ${import.meta.env.VITE_API_URL}/addqueries`,
-        productInfo
-      );
+      const { data } = await axiosSecure.post(`/addqueries`, productInfo);
       if (data.insertedId) {
         toast.success("Querie inserted successfully");
       }

@@ -3,8 +3,8 @@ import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
 import { useEffect } from "react";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Register = () => {
   const { GoogleLogin, user, setUser, CreateUser, Updateuser, loading } =
@@ -12,6 +12,7 @@ const Register = () => {
   const location = useLocation();
   const from = location.state || "/";
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     if (user) {
@@ -28,15 +29,9 @@ const Register = () => {
   const handleGoogle = async () => {
     try {
       const result = await GoogleLogin();
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/jwt`,
-        {
-          email: result?.user?.email,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.post(`/jwt`, {
+        email: result?.user?.email,
+      });
 
       toast.success("google login successful");
       navigate(from, { replace: true });
@@ -51,15 +46,9 @@ const Register = () => {
       const result = await CreateUser(email, password);
       await Updateuser(name, photourl);
       setUser({ ...result?.user, photoURL: photourl, displayName: name });
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/jwt`,
-        {
-          email: result?.user?.email,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.post(` /jwt`, {
+        email: result?.user?.email,
+      });
 
       toast.success("user created successfully");
       navigate(from, { replace: true });

@@ -3,14 +3,15 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
-import { useEffect } from "react";
 
+import { useEffect } from "react";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 const Login = () => {
   const { GoogleLogin, Signin, user, loading } = useAuth();
   const location = useLocation();
   const from = location.state || "/";
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     if (user) {
@@ -28,15 +29,9 @@ const Login = () => {
     const { email, password } = data;
     try {
       const result = await Signin(email, password);
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/jwt`,
-        {
-          email: result?.user?.email,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.post(` /jwt`, {
+        email: result?.user?.email,
+      });
 
       toast.success("login successful");
       navigate(from, { replace: true });
@@ -48,15 +43,9 @@ const Login = () => {
   const handleGoogle = async () => {
     try {
       const result = await GoogleLogin();
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/jwt`,
-        {
-          email: result?.user?.email,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.post(` /jwt`, {
+        email: result?.user?.email,
+      });
 
       toast.success("google login successful");
       navigate(from, { replace: true });

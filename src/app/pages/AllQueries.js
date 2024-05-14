@@ -3,16 +3,18 @@ import axios from "axios";
 
 import QuriesCard from "../components/quries/QuriesCard";
 import { CiGrid2H, CiGrid41 } from "react-icons/ci";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AllQueries = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setloading] = useState(true);
   const [layout, setloayout] = useState();
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/queries`);
+      const res = await axiosSecure.get(`/queries`);
 
       const sortedData = res.data.sort((a, b) => {
         return parseInt(b._id) - parseInt(a._id);

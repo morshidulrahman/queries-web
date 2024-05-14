@@ -4,19 +4,17 @@ import useAuth from "../hooks/useAuth";
 
 import MyQuariesCard from "../components/myQuries/MyQuariesCard";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const MyQueries = () => {
   const [Queries, setQueries] = useState([]);
   const { user } = useAuth();
   const [loading, setloading] = useState(true);
 
+  const axiosSecure = useAxiosSecure();
+
   const getData = async () => {
-    const res = await axios.get(
-      `${import.meta.env.VITE_API_URL}/myqueries/${user?.email}`,
-      {
-        withCredentials: true,
-      }
-    );
+    const res = await axiosSecure.get(`/myqueries/${user?.email}`);
 
     const sortedData = res.data.sort((a, b) => {
       return new Date(b.userInfo.datePosted) - new Date(a.userInfo.datePosted);

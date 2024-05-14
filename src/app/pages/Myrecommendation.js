@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
-import { MdDelete } from "react-icons/md";
+
 import RecommendTable from "../components/Recommen/RecommendTable";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Myrecommendation = () => {
   const { user } = useAuth();
   const [recomendation, setrecommendation] = useState();
+  const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
-    const res = await axios.get(
-      `${import.meta.env.VITE_API_URL}/myrecommendations/${user?.email}`,
-      { withCredentials: true }
-    );
+    const res = await axiosSecure.get(`/myrecommendations/${user?.email}`);
     setrecommendation(res.data);
   };
 

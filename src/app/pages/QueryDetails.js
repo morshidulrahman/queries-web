@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const QueryDetails = () => {
   const { id } = useParams();
@@ -10,12 +11,11 @@ const QueryDetails = () => {
   const [recommend, setrecommend] = useState([]);
   const [loading, setloading] = useState(false);
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
   const getComment = async () => {
     try {
-      const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/recommendations/${id}`
-      );
+      const { data } = await axiosSecure(` /recommendations/${id}`);
       setrecommend(data);
       console.log("recomenddata", data);
     } catch (e) {
@@ -25,9 +25,7 @@ const QueryDetails = () => {
 
   const getData = async () => {
     try {
-      const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/queries/${id}`
-      );
+      const { data } = await axiosSecure(` /queries/${id}`);
       setdata(data);
       setloading(false);
     } catch (e) {
@@ -81,15 +79,13 @@ const QueryDetails = () => {
     };
 
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/recommendations`,
+      const { data } = await axiosSecure.post(
+        ` /recommendations`,
         recommend_info
       );
       toast.success("comment successfully");
       getComment();
-      const res = await axios.patch(
-        `${import.meta.env.VITE_API_URL}/myrecqueries/${_id}`
-      );
+      const res = await axiosSecure.patch(`/myrecqueries/${_id}`);
       getData();
 
       from.reset();

@@ -1,19 +1,18 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const UpdateQueries = () => {
   const { id } = useParams();
   const [data, setdata] = useState();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/queries/${id}`
-        );
+        const { data } = await axiosSecure.get(`/queries/${id}`);
         setdata(data);
       } catch (e) {
         toast.error(e.message);
@@ -49,10 +48,7 @@ const UpdateQueries = () => {
     };
 
     try {
-      const { data } = await axios.put(
-        `${import.meta.env.VITE_API_URL}/queries/${id}`,
-        productInfo
-      );
+      const { data } = await axiosSecure.put(` /queries/${id}`, productInfo);
       if (data.modifiedCount > 0) {
         toast.success("Queries updated successfully");
         navigate("/myqueries");
