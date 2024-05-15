@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Loader from "../utils/Loader";
 
 const QueryDetails = () => {
   const { id } = useParams();
@@ -15,9 +16,8 @@ const QueryDetails = () => {
 
   const getComment = async () => {
     try {
-      const { data } = await axiosSecure(` /recommendations/${id}`);
+      const { data } = await axiosSecure(`/recommendations/${id}`);
       setrecommend(data);
-      console.log("recomenddata", data);
     } catch (e) {
       toast.error(e.message);
     }
@@ -25,7 +25,7 @@ const QueryDetails = () => {
 
   const getData = async () => {
     try {
-      const { data } = await axiosSecure(` /queries/${id}`);
+      const { data } = await axiosSecure(`/queries/${id}`);
       setdata(data);
       setloading(false);
     } catch (e) {
@@ -80,7 +80,7 @@ const QueryDetails = () => {
 
     try {
       const { data } = await axiosSecure.post(
-        ` /recommendations`,
+        `/recommendations`,
         recommend_info
       );
       toast.success("comment successfully");
@@ -95,14 +95,16 @@ const QueryDetails = () => {
   };
 
   if (loading) {
-    return <h1>loading.........</h1>;
+    return <Loader />;
   }
 
   return (
     <div className="container mx-auto px-5 ">
-      <h1 className="py-10 font-bold text-center text-2xl">Queries Details</h1>
+      <h1 className="py-10 font-bold text-center text-2xl dark:text-white">
+        Queries Details
+      </h1>
       <div className="flex gap-5 flex-col lg:flex-row">
-        <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+        <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 ">
           <img
             className="object-cover w-full h-64"
             src={productImage}
@@ -127,11 +129,11 @@ const QueryDetails = () => {
               >
                 {productName}
               </a>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-100">
                 {queryTitle}
               </p>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                <span className="text-black font-semibold capitalize">
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-100">
+                <span className="text-black font-semibold capitalize dark:text-white">
                   reason :{" "}
                 </span>{" "}
                 {alternationReason}
@@ -162,7 +164,7 @@ const QueryDetails = () => {
               </div>
             </div>
             <div className="mt-12">
-              <h2 className="font-semibold pb-4 text-lg">
+              <h2 className="font-semibold pb-4 text-lg dark:text-white">
                 All Recommendations
               </h2>
               <div className=" flex flex-col gap-4">
@@ -194,8 +196,8 @@ const QueryDetails = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white border rounded-lg p-5 lg:w-1/2 max-w-2xl">
-          <h2 className="py-3 font-semibold text-center">
+        <div className="bg-white border rounded-lg p-5 lg:w-1/2 max-w-2xl dark:bg-gray-800 dark:border-gray-800">
+          <h2 className="py-3 font-semibold text-center dark:text-white text-xl">
             Add a Recommendations
           </h2>
           <form onSubmit={handleSubmit}>

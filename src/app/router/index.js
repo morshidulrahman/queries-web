@@ -37,7 +37,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/recommendation",
-        element: <Recommendation />,
+        element: (
+          <PrivateRoute>
+            <Recommendation />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/addqueries",

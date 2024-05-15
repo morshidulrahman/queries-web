@@ -52,7 +52,9 @@ const MyQueries = () => {
             alt="emptycart"
             className=""
           />
-          <p className="font-bold py-2 text-lg">Your Quries is Empty</p>
+          <p className="font-bold py-2 text-xl dark:text-white">
+            Your Quries is Empty
+          </p>
           <Link to="/addqueries">
             <button className="bg-black hover:bg-[#000000f2] text-white font-semibold py-2 px-6 mt-5 rounded ">
               Add Queries

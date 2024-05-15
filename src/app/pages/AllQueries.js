@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { BiSolidGrid } from "react-icons/bi";
 import QuriesCard from "../components/quries/QuriesCard";
 import { CiGrid2H, CiGrid41 } from "react-icons/ci";
 import useAxiosSecure from "../hooks/useAxiosSecure";
@@ -10,7 +10,7 @@ const AllQueries = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setloading] = useState(true);
-  const [layout, setloayout] = useState();
+  const [layout, setloayout] = useState("lg:grid-cols-3");
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
@@ -29,7 +29,6 @@ const AllQueries = () => {
 
   const handlerSearch = (e) => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   };
 
   const SearchFilter = data.filter((e) =>
@@ -43,8 +42,8 @@ const AllQueries = () => {
       <h1 className="font-bold text-center py-5 text-4xl dark:text-white">
         All Queries
       </h1>
-      <div className="flex gap-5 justify-between items-center py-5">
-        <div className=" w-1/2">
+      <div className="flex gap-5 justify-between items-center py-8">
+        <div className="lg:w-[80%] w-full">
           <input
             type="text"
             className="border border-gray-300 rounded px-4 py-2 w-full"
@@ -53,28 +52,29 @@ const AllQueries = () => {
             onChange={handlerSearch}
           />
         </div>
-        <div className="flex gap-2 pr-2">
+        <div className="lg:flex gap-2 pr-2 hidden">
           <button
-            onClick={() => setloayout("one")}
+            onClick={() => setloayout("lg:grid-cols-1")}
             className="bg-[#017b6e] text-white font-bold p-1 rounded hover:bg-[#017b6ff0] duration-300 transition-all
           "
           >
             <CiGrid2H size={30} />
           </button>
           <button
-            onClick={() => setloayout("two")}
+            onClick={() => setloayout("lg:grid-cols-2")}
             className="bg-[#017b6e] text-white font-bold p-1 rounded hover:bg-[#017b6ff0] duration-300 transition-all"
           >
             <CiGrid41 size={30} />
           </button>
+          <button
+            onClick={() => setloayout("lg:grid-cols-3")}
+            className="bg-[#017b6e] text-white font-bold p-1 rounded hover:bg-[#017b6ff0] duration-300 transition-all"
+          >
+            <BiSolidGrid size={30} />
+          </button>
         </div>
       </div>
-      <div
-        className={`${layout === "one" ? "lg:grid-cols-1  " : ""}${
-          layout === "two" ? "lg:grid-cols-2 " : ""
-        }
-      grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6`}
-      >
+      <div className={`grid ${layout} grid  md:grid-cols-2 grid-cols-1 gap-6`}>
         {SearchFilter?.map((query) => (
           <QuriesCard quris={query} key={query._id} reccombtn="recom" />
         ))}

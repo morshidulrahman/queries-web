@@ -7,7 +7,7 @@ import Loader from "../utils/Loader";
 
 const Layout = () => {
   const { loading } = useAuth();
-  if (loading) return <Loader />;
+
   return (
     <div>
       <Navbar />

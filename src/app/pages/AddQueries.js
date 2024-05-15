@@ -3,10 +3,13 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 const AddQueries = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // to change the date format
@@ -45,6 +48,7 @@ const AddQueries = () => {
       if (data.insertedId) {
         toast.success("Querie inserted successfully");
       }
+      navigate("/myqueries");
       from.reset();
     } catch (err) {
       toast.error(err.message);
@@ -53,8 +57,8 @@ const AddQueries = () => {
 
   return (
     <div>
-      <div className="container mx-auto px-5">
-        <section className="max-w-2xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 my-10 border">
+      <div className="container mx-auto px-5 py-10">
+        <section className="max-w-2xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800  border dark:border-gray-700">
           <h2 className="text-xl font-semibold text-gray-700 capitalize dark:text-white text-center">
             Add a queries
           </h2>

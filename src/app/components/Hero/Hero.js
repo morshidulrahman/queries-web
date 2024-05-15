@@ -18,8 +18,8 @@ const Hero = () => {
         }}
       >
         <SwiperSlide>
-          <div className="w-full h-[450px] lg:h-[85vh] container mx-auto px-5 lg:flex gap-5 items-center  bg-[#017b6e]">
-            <div className="lg:py-24 md:24  lg:w-[40%] w-[90%]">
+          <div className="w-full h-[380px] lg:h-[85vh] container mx-auto px-5 lg:flex gap-5 items-center  bg-[#017b6e]">
+            <div className="lg:py-24    lg:w-[40%] w-[90%]  py-10">
               <h2 className="capitalize text-2xl  md:text-5xl font-extrabold lg:leading-[60px] leading-1">
                 Explore Diverse Topics
               </h2>
@@ -46,8 +46,8 @@ const Hero = () => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="w-full h-[450px] lg:h-[85vh] container mx-auto px-5 lg:flex gap-5 items-center  bg-[#017b6e]">
-            <div className="lg:py-24 md:24  lg:w-[40%] w-[90%]">
+          <div className="w-full h-[380px] lg:h-[85vh] container mx-auto px-5 lg:flex gap-5 items-center  bg-[#017b6e]">
+            <div className="lg:py-24    lg:w-[40%] w-[90%]  py-10">
               <h2 className="capitalize text-2xl  md:text-5xl font-extrabold lg:leading-[60px] leading-1">
                 Explore Diverse Topics
               </h2>
@@ -74,8 +74,8 @@ const Hero = () => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="w-full h-[450px] lg:h-[85vh] container mx-auto px-5 lg:flex gap-5 items-center  bg-[#017b6e]">
-            <div className="lg:py-24 md:24  lg:w-[40%] w-[90%]">
+          <div className="w-full h-[380px] lg:h-[85vh] container mx-auto px-5 lg:flex gap-5 items-center  bg-[#017b6e]">
+            <div className="lg:py-24    lg:w-[40%] w-[90%]  py-10">
               <h2 className="capitalize text-2xl  md:text-5xl font-extrabold lg:leading-[60px] leading-1">
                 Explore Diverse Topics
               </h2>

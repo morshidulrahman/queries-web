@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 function useTheme() {
   const storedTheme = localStorage.getItem("theme");
-  const [theme, setTheme] = useState(storedTheme || "dark");
+  const [theme, setTheme] = useState(storedTheme || "light");
   const nextTheme = theme === "dark" ? "light" : "dark";
 
   useEffect(() => {

@@ -18,14 +18,17 @@ const AuthProvider = ({ children }) => {
   const provider = new GoogleAuthProvider();
 
   const CreateUser = (email, password) => {
+    setloading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const Signin = (email, password) => {
+    setloading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const GoogleLogin = () => {
+    setloading(true);
     return signInWithPopup(auth, provider);
   };
 
@@ -37,25 +40,47 @@ const AuthProvider = ({ children }) => {
   };
 
   const Logout = async () => {
-    const { data } = await axios(`${import.meta.env.VITE_API_URL}/logout`, {
-      withCredentials: true,
-    });
-    console.log(data);
     return signOut(auth);
   };
 
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       setUser(user);
+  //       setloading(false);
+  //     } else {
+  //       setUser(null);
+  //       setloading(false);
+  //     }
+  //   });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-        setloading(false);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
+      setUser(currentUser);
+      setloading(false);
+      // if user exists then issue a token
+      if (currentUser) {
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/jwt`, loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {});
       } else {
-        setUser(null);
-        setloading(false);
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/logout`, loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
       }
     });
     return () => {
-      unsubscribe();
+      return unsubscribe();
     };
   }, []);
 

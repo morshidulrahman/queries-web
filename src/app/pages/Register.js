@@ -26,18 +26,15 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const handleGoogle = async () => {
-    try {
-      const result = await GoogleLogin();
-      const { data } = await axiosSecure.post(`/jwt`, {
-        email: result?.user?.email,
+  const handleGoogle = () => {
+    GoogleLogin()
+      .then((res) => {
+        toast.success("login successfully");
+        navigate(from);
+      })
+      .catch((err) => {
+        toast.error(err.message);
       });
-
-      toast.success("google login successful");
-      navigate(from, { replace: true });
-    } catch (e) {
-      toast.error(e.message);
-    }
   };
 
   const onSubmit = async (data) => {
@@ -46,9 +43,6 @@ const Register = () => {
       const result = await CreateUser(email, password);
       await Updateuser(name, photourl);
       setUser({ ...result?.user, photoURL: photourl, displayName: name });
-      const { data } = await axiosSecure.post(` /jwt`, {
-        email: result?.user?.email,
-      });
 
       toast.success("user created successfully");
       navigate(from, { replace: true });
