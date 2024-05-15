@@ -74,9 +74,7 @@ const AuthProvider = ({ children }) => {
           .post(`${import.meta.env.VITE_API_URL}/logout`, loggedUser, {
             withCredentials: true,
           })
-          .then((res) => {
-            console.log(res.data);
-          });
+          .then((res) => {});
       }
     });
     return () => {

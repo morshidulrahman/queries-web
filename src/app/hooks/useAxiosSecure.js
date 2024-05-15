@@ -10,20 +10,19 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
   const { Logout } = useAuth();
   const navigate = useNavigate();
-  // axiosSecure.interceptors.response.use(
-  //   (res) => {
-  //     console.log("agei thameis desease", res);
-  //     return res;
-  //   },
-  //   async (error) => {
-  //     console.log("axios inter error", error.message);
-  //     if (error.response.status === 401 || error.response.status === 403) {
-  //       await Logout();
-  //       navigate("/login");
-  //     }
-  //     return Promise.reject(error);
-  //   }
-  // );
+  axiosSecure.interceptors.response.use(
+    (res) => {
+      return res;
+    },
+    async (error) => {
+      console.log("axios inter error", error.message);
+      if (error.response.status === 401 || error.response.status === 403) {
+        await Logout();
+        navigate("/login");
+      }
+      return Promise.reject(error);
+    }
+  );
 
   return axiosSecure;
 };
