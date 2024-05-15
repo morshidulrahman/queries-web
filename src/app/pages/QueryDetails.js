@@ -103,7 +103,7 @@ const QueryDetails = () => {
       <h1 className="py-10 font-bold text-center text-2xl dark:text-white">
         Queries Details
       </h1>
-      <div className="flex gap-5 flex-col lg:flex-row">
+      <div className="flex gap-5 flex-col lg:flex-row pb-16">
         <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 ">
           <img
             className="object-cover w-full h-64"

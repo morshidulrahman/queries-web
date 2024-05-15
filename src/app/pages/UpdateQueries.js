@@ -48,7 +48,7 @@ const UpdateQueries = () => {
     };
 
     try {
-      const { data } = await axiosSecure.put(` /queries/${id}`, productInfo);
+      const { data } = await axiosSecure.put(`/queries/${id}`, productInfo);
       if (data.modifiedCount > 0) {
         toast.success("Queries updated successfully");
         navigate("/myqueries");
@@ -60,8 +60,8 @@ const UpdateQueries = () => {
 
   return (
     <div>
-      <div className="container mx-auto px-5">
-        <section className="max-w-2xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 my-10 border">
+      <div className="container mx-auto px-5 py-10">
+        <section className="max-w-2xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800  border">
           <h2 className="text-xl font-semibold text-gray-700 capitalize dark:text-white text-center">
             Add a queries
           </h2>
