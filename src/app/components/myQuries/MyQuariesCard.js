@@ -1,12 +1,27 @@
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const MyQuariesCard = ({ queries, getData }) => {
+const MyQuariesCard = ({ queries, refetch }) => {
   const { _id, productName, queryTitle, datePosted, productImage, userInfo } =
     queries;
+
+  const { mutateAsync, data } = useMutation({
+    mutationFn: async ({ _id }) => {
+      const { data } = await axios.delete(
+        `${import.meta.env.VITE_API_URL}/queries/${_id}`
+      );
+
+      return data;
+    },
+    onSuccess: () => {
+      console.log(data);
+      refetch();
+    },
+  });
 
   const handleDelete = async () => {
     try {
@@ -20,17 +35,7 @@ const MyQuariesCard = ({ queries, getData }) => {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const { data } = await axios.delete(
-            `${import.meta.env.VITE_API_URL}/queries/${_id}`
-          );
-          if (data.deletedCount > 0) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-            getData();
-          }
+          await mutateAsync({ _id });
         }
       });
     } catch (e) {

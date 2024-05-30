@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaFacebook, FaTwitter, FaInstagramSquare } from "react-icons/fa";
+import SubscribeModal from "../../modal/SubscribeModal";
 
 const Footer = () => {
+  const [isOpen, setisOpen] = useState(false);
+
+  const closeModal = () => {
+    setisOpen(!isOpen);
+  };
+
   return (
     <footer className="bg-white dark:bg-gray-900 border-t dark:border-t-gray-800 pt-6 border-gray-200">
       <div className="container p-6 mx-auto">
@@ -80,10 +87,17 @@ const Footer = () => {
                 <span className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
                   rebbit@gmail.com
                 </span>
+                <button
+                  onClick={() => setisOpen(true)}
+                  className="bg-[#017b6e] text-white px-4 py-2 rounded-md hover:bg-transparent hover:text-[#017b6e] duration-300 transition-all border border-[#017b6e] mt-2"
+                >
+                  subscribe
+                </button>
               </div>
             </div>
           </div>
         </div>
+        <SubscribeModal isOpen={isOpen} closeModal={closeModal} />
         <hr className="h-px my-6 bg-gray-200 border-none dark:bg-gray-700" />
         <div>
           <p className="text-center text-gray-500 dark:text-gray-400">

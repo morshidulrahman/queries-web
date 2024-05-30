@@ -6,13 +6,17 @@ import MyQuariesCard from "../components/myQuries/MyQuariesCard";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Loader from "../utils/Loader";
+import { useQuery } from "@tanstack/react-query";
 
 const MyQueries = () => {
-  const [Queries, setQueries] = useState([]);
   const { user } = useAuth();
-  const [loading, setloading] = useState(true);
 
   const axiosSecure = useAxiosSecure();
+
+  const { data, error, isLoading, isError, refetch } = useQuery({
+    queryFn: () => getData(),
+    queryKey: ["myqueries"],
+  });
 
   const getData = async () => {
     const res = await axiosSecure.get(`/myqueries/${user?.email}`);
@@ -20,16 +24,12 @@ const MyQueries = () => {
     const sortedData = res.data.sort((a, b) => {
       return new Date(b.userInfo.datePosted) - new Date(a.userInfo.datePosted);
     });
-
-    setQueries(sortedData);
-    setloading(false);
+    return sortedData;
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  if (isError || error) return console.log(isError, error);
 
-  if (loading) return <Loader />;
+  if (isLoading) return <Loader />;
 
   return (
     <div>
@@ -45,7 +45,7 @@ const MyQueries = () => {
           </Link>
         </div>
       </div>
-      {Queries.length == 0 ? (
+      {data.length == 0 ? (
         <div className="py-20 flex items-center justify-center flex-col gap-5">
           <img
             src="https://i.ibb.co/F7SsVnK/empty-cart.gif"
@@ -63,11 +63,11 @@ const MyQueries = () => {
         </div>
       ) : (
         <div className="py-10 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2  gap-5 container mx-auto px-5">
-          {Queries?.map((queries) => (
+          {data?.map((queries) => (
             <MyQuariesCard
               key={queries._id}
               queries={queries}
-              getData={getData}
+              refetch={refetch}
             />
           ))}
         </div>
