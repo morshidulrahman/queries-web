@@ -2,6 +2,24 @@
 
 # https://product-7b5e7.web.app/
 
+#To Run Local
+
+```bash
+# Clone this project
+$ git clone https://github.com/morshidulrahman/queries-web.git
+
+# Access
+$ cd queries-web
+
+# Install dependencies
+$ yarn
+
+# Run the project
+$ yarn dev
+
+# The server will initialize in the <http://localhost:3000>
+```
+
 # Project Description
 
 - You have to use yarn run this project
